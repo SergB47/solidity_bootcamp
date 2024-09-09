@@ -39,6 +39,14 @@ contract TokenExchTest is Test{
         tokenExch.changeToken(address(tokenOne), address(tokenTwo), 10e18);
         console.log("Alice Balance After:",tokenTwo.balanceOf(address(Alice)));
 
+        vm.startPrank(Bob);
+        vm.deal(Bob,10 ether);
+        console.log("Ether balance Bob:", address(Bob).balance);
+        tokenTwo.mint(address(tokenExch),100e18);
+        tokenExch.changeEther{value: 1 ether}(address(tokenTwo));
+        console.log("Bob balance tokenTwo:", IERC20(tokenTwo).balanceOf(address(Bob)));
+        
+
 
     }
 
